@@ -3,31 +3,29 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-const authRoutes = require("./src/routes/auth");
-const userRoutes = require("./src/routes/users");
+const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/users");
 
 const app = express();
 
 app.use(cors({ origin: "http://localhost:5173" }));
-
 app.use(express.json());
 
-// Route registration
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
 app.get("/api/health", (req, res) => {
-  res.json({ status: "ok" });
+  res.json({ ok: true });
 });
 
-// Connect to MongoDB THEN start server
+const PORT = process.env.PORT || 5000;
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log(`Server running on port ${process.env.PORT}`);
-    });
+    app.listen(PORT, () => console.log(`Backend running on http://localhost:${PORT}`));
   })
-  .catch(err => {
-    console.error("MongoDB connection failed", err);
+  .catch((err) => {
+    console.error("Mongo connection error:", err);
+    process.exit(1);
   });

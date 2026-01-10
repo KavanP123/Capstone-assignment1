@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { apiAuth } from "../utils/api";
 
@@ -13,7 +14,6 @@ export default function Users({ token }) {
   return (
     <div className="card">
       <h2>All Users</h2>
-
       <ul>
         {users.map(u => (
           <li key={u._id}>

@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { api } from "../utils/api";
 
@@ -13,8 +14,8 @@ export default function Register() {
 
   const [message, setMessage] = useState("");
 
-  function update(field, value) {
-    setForm({ ...form, [field]: value });
+  function update(k, v) {
+    setForm({ ...form, [k]: v });
   }
 
   async function submit(e) {
@@ -26,7 +27,7 @@ export default function Register() {
         method: "POST",
         body: JSON.stringify(form)
       });
-      setMessage("Account created. You can now log in.");
+      setMessage("Account created. You can log in.");
     } catch (err) {
       setMessage(err.message);
     }
@@ -35,16 +36,13 @@ export default function Register() {
   return (
     <form className="card" onSubmit={submit}>
       <h2>Register</h2>
-
       <input placeholder="Username" onChange={e => update("username", e.target.value)} />
       <input placeholder="First Name" onChange={e => update("firstName", e.target.value)} />
       <input placeholder="Last Name" onChange={e => update("lastName", e.target.value)} />
       <input type="date" onChange={e => update("birthday", e.target.value)} />
       <input type="password" placeholder="Password" onChange={e => update("password", e.target.value)} />
       <input type="password" placeholder="Confirm Password" onChange={e => update("confirmPassword", e.target.value)} />
-
       {message && <p>{message}</p>}
-
       <button>Create Account</button>
     </form>
   );

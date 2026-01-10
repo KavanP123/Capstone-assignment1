@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { api } from "../utils/api";
 
@@ -24,22 +25,9 @@ export default function Login({ onLogin }) {
   return (
     <form className="card" onSubmit={submit}>
       <h2>Login</h2>
-
-      <input
-        placeholder="Username"
-        value={username}
-        onChange={e => setUsername(e.target.value)}
-      />
-
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-
+      <input value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" />
+      <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
       {error && <p className="error">{error}</p>}
-
       <button>Login</button>
     </form>
   );

@@ -1,7 +1,9 @@
+import React from "react";
 import { useEffect, useState } from "react";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Users from "./pages/Users";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import Users from "../pages/Users";
+import "./styles.css";
 
 export default function App() {
   const [page, setPage] = useState("login");
