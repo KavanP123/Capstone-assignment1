@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { apiAuth } from "../utils/api";
+import { format } from 'date-fns';
+
 
 export default function Users({ token }) {
   const [users, setUsers] = useState([]);
@@ -17,7 +19,7 @@ export default function Users({ token }) {
       <ul>
         {users.map(u => (
           <li key={u._id}>
-            {u.username} — {u.firstName} {u.lastName}
+            {u.username} — {u.firstName} {u.lastName} — {format(u.birthday, "dd/MM/yyyy")} — {format(u.createdAt, "dd/MM/yyyy")}
           </li>
         ))}
       </ul>
